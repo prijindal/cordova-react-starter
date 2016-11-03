@@ -6,6 +6,7 @@ process.env.NODE_ENV = 'development';
 // https://github.com/motdotla/dotenv
 require('dotenv').config({silent: true});
 
+var cordova = require('cordova');
 var chalk = require('chalk');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -29,6 +30,10 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 var DEFAULT_PORT = process.env.PORT || 3000;
 var compiler;
 var handleCompile;
+
+// To do cordova run after build
+let isCordova = process.argv.some(arg => arg.indexOf('--cordova') > -1);
+let isBuilding = false;
 
 // You can safely remove this after ejecting.
 // We only use this block for testing of Create React App itself:
@@ -101,6 +106,14 @@ function setupCompiler(host, port, protocol) {
       console.log('You may use special comments to disable some warnings.');
       console.log('Use ' + chalk.yellow('// eslint-disable-next-line') + ' to ignore the next line.');
       console.log('Use ' + chalk.yellow('/* eslint-disable */') + ' to ignore all warnings in a file.');
+    }
+
+    if(isCordova) {
+      if (isBuilding) return ;
+      isBuilding = true;
+      cordova.run((err) => {
+        isBuilding = false;
+      })
     }
   });
 }
