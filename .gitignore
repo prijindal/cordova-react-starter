@@ -13,3 +13,9 @@ www
 .DS_Store
 .env
 npm-debug.log
+
+# cordova
+platforms/**/
+!platforms/*.json
+plugins/**/
+!plugins/*.json
