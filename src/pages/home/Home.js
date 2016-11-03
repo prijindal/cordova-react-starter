@@ -4,6 +4,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert';
+import PopoverAnimationCordova from '../../animations/PopoverAnimationCordova';
 import Layout from '../../layout';
 import logo from './logo.svg';
 import './Home.css';
@@ -53,6 +54,7 @@ class Home extends Component {
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           onRequestClose={this.closePopover}
+          animation={PopoverAnimationCordova}
         >
           <Menu>
             <MenuItem primaryText="Refresh" />
